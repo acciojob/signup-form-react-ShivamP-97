@@ -6,52 +6,66 @@ function App() {
   const [gender, setGender] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const [submittedName, setSubmittedName] = useState("");
+
+  // Field-specific error states
+  const [nameError, setNameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [genderError, setGenderError] = useState("");
+  const [phoneError, setPhoneError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [emptyError, setEmptyError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setError("");
 
-    // Validate all fields
+    // Reset all errors
+    setNameError("");
+    setEmailError("");
+    setGenderError("");
+    setPhoneError("");
+    setPasswordError("");
+    setEmptyError("");
+    setSubmittedName("");
+
+    // Check for empty fields
     if (!name || !email || !gender || !phoneNumber || !password) {
-      setError("All fields are mandatory");
+      setEmptyError("All fields are mandatory");
       return;
     }
 
-    // Name validation (alphanumeric)
+    // Name validation
     if (!/^[a-zA-Z0-9]+$/.test(name)) {
-      setError("Name is not alphanumeric");
+      setNameError("Name is not alphanumeric");
       return;
     }
 
-    // Email validation (must contain @)
+    // Email validation
     if (!email.includes("@")) {
-      setError("email must contain @");
+      setEmailError("email must contain @");
       return;
     }
 
     // Gender validation
     if (!["male", "female", "other"].includes(gender.toLowerCase())) {
-      setError("Please select gender"); // Appears in <span>
+      setGenderError("Please select gender");
       return;
     }
 
-    // Phone number validation (numbers only)
+    // Phone number validation
     if (!/^[0-9]+$/.test(phoneNumber)) {
-      setError("Phone Number must contain only numbers");
+      setPhoneError("Phone Number must contain only numbers");
       return;
     }
 
-    // Password validation (at least 6 letters)
+    // Password validation
     if (password.length < 6) {
-      setError("Password must contain atleast 6 letters");
+      setPasswordError("Password must contain atleast 6 letters");
       return;
     }
 
-    // If everything passes
-    setSubmittedName(name.toUpperCase()); // Cypress expects uppercase
-    setError("");
+    // Success
+    setSubmittedName(name.toUpperCase());
   };
 
   return (
@@ -64,12 +78,16 @@ function App() {
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
+        {nameError && <span data-testid="name-error">{nameError}</span>}
+
         <input
           data-testid="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
+        {emailError && <span data-testid="email-error">{emailError}</span>}
+
         <select
           data-testid="gender"
           value={gender}
@@ -80,12 +98,16 @@ function App() {
           <option value="female">Female</option>
           <option value="other">Other</option>
         </select>
+        {genderError && <span data-testid="gender-error">{genderError}</span>}
+
         <input
           data-testid="phoneNumber"
           placeholder="Phone Number"
           value={phoneNumber}
           onChange={(e) => setPhoneNumber(e.target.value)}
         />
+        {phoneError && <span data-testid="phone-error">{phoneError}</span>}
+
         <input
           data-testid="password"
           type="password"
@@ -93,11 +115,14 @@ function App() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        {passwordError && <span data-testid="password-error">{passwordError}</span>}
+
         <button data-testid="submit" type="submit">
           Submit
         </button>
       </form>
-      {error && <span data-testid="error">{error}</span>}
+
+      {emptyError && <span data-testid="error">{emptyError}</span>}
       {submittedName && <h2>Hello {submittedName}</h2>}
     </div>
   );
