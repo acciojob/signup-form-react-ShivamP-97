@@ -3,7 +3,7 @@ import React, { useState } from "react";
 function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [gender, setGender] = useState("Male");
+  const [gender, setGender] = useState("male");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -11,33 +11,33 @@ function Signup() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     setError("");
     setWelcome("");
 
     if (!name || !email || !phoneNumber || !password) {
-      setError("All fields are mandatory.");
+      setError("All fields are mandatory");
       return;
     }
 
     const nameRegex = /^[a-zA-Z0-9 ]+$/;
     if (!nameRegex.test(name)) {
-      setError("Name is not alphanumeric.");
+      setError("Name is not alphanumeric");
       return;
     }
 
     if (!email.includes("@")) {
-      setError("Email must contain @.");
+      setError("Email must contain @");
       return;
     }
 
-    const validGenders = ["Male", "Female", "Other"];
-    if (!validGenders.includes(gender)) {
-      setError("Please identify as male, female or others.");
+    if (!["male", "female", "other"].includes(gender)) {
+      setError("Please identify as male, female or others");
       return;
     }
 
     if (isNaN(phoneNumber)) {
-      setError("Phone Number must contain only numbers.");
+      setError("Phone Number must contain only numbers");
       return;
     }
 
@@ -46,7 +46,7 @@ function Signup() {
       return;
     }
 
-    const username = email.substring(0, email.indexOf("@"));
+    const username = email.split("@")[0];
     setWelcome(`Hello ${username}`);
   };
 
@@ -57,14 +57,12 @@ function Signup() {
           data-testid="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="Name"
         />
 
         <input
           data-testid="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
         />
 
         <select
@@ -72,16 +70,15 @@ function Signup() {
           value={gender}
           onChange={(e) => setGender(e.target.value)}
         >
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
-          <option value="Other">Other</option>
+          <option value="male">male</option>
+          <option value="female">female</option>
+          <option value="other">other</option>
         </select>
 
         <input
           data-testid="phoneNumber"
           value={phoneNumber}
           onChange={(e) => setPhoneNumber(e.target.value)}
-          placeholder="Phone Number"
         />
 
         <input
@@ -89,7 +86,6 @@ function Signup() {
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
         />
 
         <button data-testid="submit" type="submit">
@@ -98,7 +94,7 @@ function Signup() {
       </form>
 
       {error && <span>{error}</span>}
-      {welcome && <span>{welcome}</span>}
+      {welcome && <h2>{welcome}</h2>}
     </div>
   );
 }
