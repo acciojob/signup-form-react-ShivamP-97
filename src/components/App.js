@@ -15,7 +15,7 @@ function App() {
 
     // Validate all fields
     if (!name || !email || !gender || !phoneNumber || !password) {
-      setError("All fields are mandatory.");
+      setError("All fields are mandatory");
       return;
     }
 
