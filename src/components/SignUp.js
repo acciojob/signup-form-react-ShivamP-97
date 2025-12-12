@@ -3,7 +3,7 @@ import React, { useState } from "react";
 function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [gender, setGender] = useState("male");
+  const [gender, setGender] = useState("Male");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -30,8 +30,8 @@ function Signup() {
       return;
     }
 
-    const validGenders = ["male", "female", "other", "others"];
-    if (!validGenders.includes(gender.toLowerCase())) {
+    const validGenders = ["Male", "Female", "Other"];
+    if (!validGenders.includes(gender)) {
       setError("Please identify as male, female or others.");
       return;
     }
@@ -55,16 +55,16 @@ function Signup() {
       <form onSubmit={handleSubmit}>
         <input
           data-testid="name"
-          placeholder="Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          placeholder="Name"
         />
 
         <input
           data-testid="email"
-          placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          placeholder="Email"
         />
 
         <select
@@ -72,24 +72,24 @@ function Signup() {
           value={gender}
           onChange={(e) => setGender(e.target.value)}
         >
-          <option value="male">male</option>
-          <option value="female">female</option>
-          <option value="other">other</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
         </select>
 
         <input
           data-testid="phoneNumber"
-          placeholder="Phone Number"
           value={phoneNumber}
           onChange={(e) => setPhoneNumber(e.target.value)}
+          placeholder="Phone Number"
         />
 
         <input
           data-testid="password"
           type="password"
-          placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          placeholder="Password"
         />
 
         <button data-testid="submit" type="submit">
@@ -97,8 +97,8 @@ function Signup() {
         </button>
       </form>
 
-      {error && <p>{error}</p>}
-      {welcome && <p>{welcome}</p>}
+      {error && <span>{error}</span>}
+      {welcome && <span>{welcome}</span>}
     </div>
   );
 }
