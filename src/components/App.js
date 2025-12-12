@@ -47,10 +47,12 @@ function App() {
     }
 
     // Gender validation
-    if (!["male", "female", "other"].includes(gender.toLowerCase())) {
-      setGenderError("Please select gender");
-      return;
-    }
+    // Gender validation
+if (!["male", "female", "other"].includes(gender.toLowerCase())) {
+  setError("Please identify as male, female or others"); // exact text Cypress expects
+  return;
+}
+
 
     // Phone number validation
     if (!/^[0-9]+$/.test(phoneNumber)) {
