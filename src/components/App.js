@@ -37,7 +37,7 @@ const App = () => {
     }
 
     setError("");
-    setSubmittedName(name.toUpperCase()); // Display name in uppercase
+    setSubmittedName(name.toUpperCase());
   };
 
   return (
@@ -46,9 +46,9 @@ const App = () => {
         <div>
           <input
             type="text"
-            id="name"
-            placeholder="Name"
+            data-testid="name"
             value={name}
+            placeholder="Name"
             onChange={(e) => setName(e.target.value)}
           />
         </div>
@@ -56,16 +56,16 @@ const App = () => {
         <div>
           <input
             type="text"
-            id="email"
-            placeholder="Email"
+            data-testid="email"
             value={email}
+            placeholder="Email"
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
 
         <div>
           <select
-            id="gender"
+            data-testid="gender"
             value={gender}
             onChange={(e) => setGender(e.target.value)}
           >
@@ -79,9 +79,9 @@ const App = () => {
         <div>
           <input
             type="text"
-            id="phoneNumber"
-            placeholder="Phone Number"
+            data-testid="phoneNumber"
             value={phoneNumber}
+            placeholder="Phone Number"
             onChange={(e) => setPhoneNumber(e.target.value)}
           />
         </div>
@@ -89,19 +89,19 @@ const App = () => {
         <div>
           <input
             type="password"
-            id="password"
-            placeholder="Password"
+            data-testid="password"
             value={password}
+            placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
 
-        <button type="submit" id="submit">Submit</button>
+        <button type="submit" data-testid="submit">Submit</button>
       </form>
 
-      {error && <span>{error}</span>}
+      {error && <span data-testid="error">{error}</span>}
 
-      {submittedName && <h2>Hello {submittedName}</h2>}
+      {submittedName && <h2 data-testid="greeting">Hello {submittedName}</h2>}
     </div>
   );
 };
